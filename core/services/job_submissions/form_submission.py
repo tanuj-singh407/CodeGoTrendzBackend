@@ -10,8 +10,16 @@ async def job_application_submission(name: str, address: str, job_profile: str, 
         raise HTTPException(
             status_code=400, detail="Only PDF files are allowed")
 
-    print(os.path.splitext(resume.filename), "------")
-
     final_name = await sanitize_filename(resume.filename)
 
-    print(final_name, "final_name")
+    upload_dirs = "uploads/resumes"
+
+    os.makedirs(upload_dirs, exist_ok=True)
+
+    file_path = os.path.join(upload_dirs, final_name)
+
+    with open(file_path, "wb") as f:
+        contents = await resume.read()
+        f.write(contents)
+
+        # print(response, "final_name")
