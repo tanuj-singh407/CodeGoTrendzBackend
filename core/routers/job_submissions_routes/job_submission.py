@@ -5,6 +5,6 @@ job_submission = APIRouter()
 
 
 @job_submission.post("/submit-job-application")
-async def submit_job_application(name: str = Form(...), address: str = Form(...), job_profile: str = Form(...), resume: UploadFile = File(...)):
-    response = await job_application_submission(name, address, job_profile, resume)
+async def submit_job_application(name: str = Form(...), email: str = Form(...), jobProfile: str = Form(...), cv: UploadFile = File(...)):
+    response = await job_application_submission(name, email, jobProfile, cv)
     return response

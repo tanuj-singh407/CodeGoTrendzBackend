@@ -7,7 +7,7 @@ from core.database.mongodb import job_applications
 from core.utils.date_time import current_date_time
 
 
-async def job_application_submission(name: str, address: str, job_profile: str, resume):
+async def job_application_submission(name: str, email: str, job_profile: str, resume):
 
     if not resume.filename.lower().endswith(".pdf"):
         raise HTTPException(
@@ -31,7 +31,7 @@ async def job_application_submission(name: str, address: str, job_profile: str, 
 
     applications = {
         "name": name,
-        "address": address,
+        "email": email,
         "job_profile": job_profile,
         "resume_path": str(resume_path),
         "submitted_date": str(data["current_date"]),
